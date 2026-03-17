@@ -6,7 +6,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Test route
+const executeRoute = require('./routes/execute');
+app.use('/api', executeRoute);
+
 app.get('/', (req, res) => {
     res.send('Backend is running');
 });
