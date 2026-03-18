@@ -1,0 +1,10 @@
+{
+    "allowed": [
+        "ls",
+        "pwd",
+        "whoami",
+        "date",
+        "echo",
+        "uname"
+    ]
+}
