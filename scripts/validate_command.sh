@@ -2,10 +2,26 @@
 
 COMMAND="$1"
 
-# Extract first word (base command)
+# -----------------------------
+# 🚨 BLOCK SPECIAL CHARACTERS
+# -----------------------------
+
+# Use grep for safer pattern matching
+if echo "$COMMAND" | grep -qE ';|&&|\||`|\$\('; then
+    echo "BLOCKED"
+    exit 1
+fi
+
+# -----------------------------
+# ✅ EXTRACT BASE COMMAND
+# -----------------------------
+
 BASE_CMD=$(echo "$COMMAND" | awk '{print $1}')
 
-# Allowed commands
+# -----------------------------
+# ✅ ALLOWED COMMANDS
+# -----------------------------
+
 ALLOWED=("ls" "pwd" "whoami" "date" "echo" "uname")
 
 for cmd in "${ALLOWED[@]}"; do
