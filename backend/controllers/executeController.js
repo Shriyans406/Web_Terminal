@@ -8,9 +8,12 @@ const executeCommand = async (req, res) => {
             return res.status(400).json({ error: 'No command provided' });
         }
 
-        const output = await runCommand(command);
+        const result = await runCommand(command);
 
-        res.json({ output });
+        res.json({
+            stdout: result.stdout,
+            stderr: result.stderr
+        });
 
     } catch (error) {
         res.status(500).json({ error: 'Execution failed' });

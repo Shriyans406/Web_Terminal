@@ -8,5 +8,5 @@ export const executeCommand = async (command) => {
     });
 
     const data = await response.json();
-    return data.output;
+    return data;
 };

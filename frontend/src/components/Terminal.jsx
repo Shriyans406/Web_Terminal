@@ -34,9 +34,15 @@ const WebTerminal = () => {
             if (char === '\r') {
                 term.current.write('\r\n');
 
-                const output = await executeCommand(command);
+                const result = await executeCommand(command);
 
-                term.current.write(output);
+                if (result.stdout) {
+                    term.current.write(result.stdout);
+                }
+
+                if (result.stderr) {
+                    term.current.write('\r\n\x1b[31m' + result.stderr + '\x1b[0m');
+                }
 
                 command = '';
                 prompt();
