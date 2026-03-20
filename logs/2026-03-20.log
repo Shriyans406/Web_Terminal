@@ -15,3 +15,12 @@
 {"timestamp":"2026-03-20T15:21:14.354Z","command":"pwd","status":"SUCCESS","stdout":"/home/sandbox_env\n","stderr":""}
 {"timestamp":"2026-03-20T15:21:29.851Z","command":"rm -rf /","status":"BLOCKED","stdout":"Error: Command not allowed\n","stderr":""}
 {"timestamp":"2026-03-20T15:21:44.280Z","command":"\u0016touch test.txt","status":"BLOCKED","stdout":"Error: Command not allowed\n","stderr":""}
+{"timestamp":"2026-03-20T17:44:40.486Z","command":"ls","status":"SUCCESS","stdout":"\n","stderr":""}
+{"timestamp":"2026-03-20T17:44:44.781Z","command":"whoami","status":"SUCCESS","stdout":"sandboxuser\n","stderr":""}
+{"timestamp":"2026-03-20T17:44:48.153Z","command":"pwd","status":"SUCCESS","stdout":"/home/sandbox_env\n","stderr":""}
+{"timestamp":"2026-03-20T17:45:00.954Z","command":"touch test.txt","status":"SUCCESS","stdout":"\n","stderr":""}
+{"timestamp":"2026-03-20T17:45:03.122Z","command":"ls","status":"SUCCESS","stdout":"test.txt\n","stderr":""}
+{"timestamp":"2026-03-20T17:45:14.482Z","command":"cat test.txt","status":"SUCCESS","stdout":"\n","stderr":""}
+{"timestamp":"2026-03-20T17:45:46.030Z","command":"mkdir testdir","status":"SUCCESS","stdout":"\n","stderr":""}
+{"timestamp":"2026-03-20T17:45:48.057Z","command":"ls","status":"SUCCESS","stdout":"testdir\ntest.txt\n","stderr":""}
+{"timestamp":"2026-03-20T17:45:55.778Z","command":"cd testdir","status":"BLOCKED","stdout":"Error: Command not allowed\n","stderr":""}

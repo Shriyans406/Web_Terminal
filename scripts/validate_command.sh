@@ -22,7 +22,7 @@ BASE_CMD=$(echo "$COMMAND" | awk '{print $1}')
 # ✅ ALLOWED COMMANDS
 # -----------------------------
 
-ALLOWED=("ls" "pwd" "whoami" "date" "echo" "uname")
+ALLOWED=("ls" "pwd" "whoami" "date" "echo" "uname" "touch" "cat" "mkdir" "rm")
 
 for cmd in "${ALLOWED[@]}"; do
     if [ "$BASE_CMD" = "$cmd" ]; then
