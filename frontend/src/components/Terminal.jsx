@@ -1,128 +1,174 @@
 import { useEffect, useRef } from 'react';
 import { Terminal } from 'xterm';
+import { FitAddon } from 'xterm-addon-fit';
 import 'xterm/css/xterm.css';
-import { executeCommand } from '../services/api';
+import { executeCommand, initSession } from '../services/api';
 
 const WebTerminal = () => {
     const terminalRef = useRef(null);
-    const termRef = useRef(null);
+
+    //new 
+    const initialized = useRef(false);
 
     useEffect(() => {
-        const term = new Terminal({
-            cursorBlink: true,
-            theme: {
-                background: '#000000',
-                foreground: '#00ff00'
-            }
-        });
 
-        term.open(terminalRef.current);
-        termRef.current = term;
+        if (initialized.current) return;
+        initialized.current = true;
+        const init = async () => {
+            await initSession();
 
-        let command = '';
-        let history = [];
-        let historyIndex = -1;
+            const term = new Terminal({
+                cursorBlink: true,
+                fontSize: 14,
+                fontFamily: 'monospace',
+                theme: {
+                    background: '#000000',   // pure black
+                    foreground: '#00ff00',   // bright green
+                    cursor: '#ffffff'
+                },
+                scrollback: 1000
+            });
 
-        const prompt = () => {
-            term.write('\r\nuser@web:~$ ');
-        };
+            const fitAddon = new FitAddon();
+            term.loadAddon(fitAddon);
 
-        term.write('Welcome to Linux Web Terminal');
-        prompt();
+            term.open(terminalRef.current);
+            fitAddon.fit();
 
-        term.onData(async (data) => {
-            const char = data;
+            setTimeout(() => {
+                fitAddon.fit();
+            }, 0);
 
-            // ENTER
-            if (char === '\r') {
-                term.write('\r\n');
+            window.addEventListener('resize', () => {
+                fitAddon.fit();
+            });
 
-                if (command.trim() !== '') {
-                    history.push(command);
-                    historyIndex = history.length;
-                }
+            let command = '';
+            let history = [];
+            let historyIndex = -1;
+            //let isProcessing = false;
 
-                const result = await executeCommand(command);
+            const prompt = () => {
+                term.write('\r\n\x1b[32muser@web\x1b[0m:\x1b[34m~\x1b[0m$ ');
+            };
 
-                if (result.stdout) {
-                    term.write(result.stdout);
-                }
+            term.write('\x1b[33mWelcome to Linux Command Sandbox\x1b[0m');
+            prompt();
 
-                if (result.stderr) {
-                    term.write('\r\n\x1b[31m' + result.stderr + '\x1b[0m');
-                }
+            term.onData(async (data) => {
+                //if (isProcessing) return;
 
-                command = '';
-                prompt();
-            }
+                const char = data;
 
-            // BACKSPACE
-            else if (char === '\u007F') {
-                if (command.length > 0) {
-                    command = command.slice(0, -1);
-                    term.write('\b \b');
-                }
-            }
+                // ENTER
+                if (char === '\r') {
+                    term.write('\r\n');
 
-            // UP ARROW
-            else if (char === '\x1b[A') {
-                if (history.length > 0 && historyIndex > 0) {
-                    historyIndex--;
-
-                    while (command.length > 0) {
-                        term.write('\b \b');
-                        command = command.slice(0, -1);
+                    if (command.trim() !== '') {
+                        history.push(command);
+                        historyIndex = history.length;
                     }
 
-                    command = history[historyIndex];
-                    term.write(command);
-                }
-            }
+                    //isProcessing = true;
 
-            // DOWN ARROW
-            else if (char === '\x1b[B') {
-                if (historyIndex < history.length - 1) {
-                    historyIndex++;
+                    // Loading indicator
+                    //term.write('\x1b[33mProcessing...\x1b[0m\r\n');
 
-                    while (command.length > 0) {
-                        term.write('\b \b');
-                        command = command.slice(0, -1);
+                    const result = await executeCommand(command);
+
+                    if (result.stdout) {
+                        term.write(result.stdout);
                     }
 
-                    command = history[historyIndex];
-                    term.write(command);
-                } else {
-                    while (command.length > 0) {
-                        term.write('\b \b');
-                        command = command.slice(0, -1);
+                    if (result.stderr) {
+                        term.write('\r\n\x1b[31m' + result.stderr + '\x1b[0m');
                     }
 
-                    historyIndex = history.length;
+                    //isProcessing = false;
                     command = '';
+                    prompt();
                 }
-            }
 
-            // NORMAL CHAR
-            else {
-                command += char;
-                term.write(char);
-            }
-        });
+                // BACKSPACE
+                else if (char === '\u007F') {
+                    if (command.length > 0) {
+                        command = command.slice(0, -1);
+                        term.write('\b \b');
+                    }
+                }
 
-        return () => {
-            term.dispose();
+                // UP ARROW
+                else if (char === '\x1b[A') {
+                    if (history.length > 0 && historyIndex > 0) {
+                        historyIndex--;
+
+                        while (command.length > 0) {
+                            term.write('\b \b');
+                            command = command.slice(0, -1);
+                        }
+
+                        command = history[historyIndex];
+                        term.write(command);
+                    }
+                }
+
+                // DOWN ARROW
+                else if (char === '\x1b[B') {
+                    if (historyIndex < history.length - 1) {
+                        historyIndex++;
+
+                        while (command.length > 0) {
+                            term.write('\b \b');
+                            command = command.slice(0, -1);
+                        }
+
+                        command = history[historyIndex];
+                        term.write(command);
+                    } else {
+                        while (command.length > 0) {
+                            term.write('\b \b');
+                            command = command.slice(0, -1);
+                        }
+
+                        historyIndex = history.length;
+                        command = '';
+                    }
+                }
+
+                // NORMAL CHAR
+                else {
+                    command += char;
+                    term.write(char);
+                }
+            });
         };
+
+        init();
     }, []);
 
     return (
         <div
-            ref={terminalRef}
             style={{
                 width: '100%',
                 height: '500px',
-                textAlign: 'left'
+                borderRadius: '10px',
+                overflow: 'hidden',
+                border: '1px solid #30363d',
+                boxShadow: '0 0 20px rgba(0,0,0,0.5)',
+                backgroundColor: '#0d1117'
             }}
-        />
+        >
+            <div
+                ref={terminalRef}
+                style={{
+                    width: '100%',
+                    height: '100%',
+                    padding: '10px',
+                    boxSizing: 'border-box',
+                    textAlign: 'left'   // ✅ CRITICAL FIX
+                }}
+            />
+        </div>
     );
 };
 

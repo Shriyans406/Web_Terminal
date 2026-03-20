@@ -24,3 +24,14 @@
 {"timestamp":"2026-03-20T17:45:46.030Z","command":"mkdir testdir","status":"SUCCESS","stdout":"\n","stderr":""}
 {"timestamp":"2026-03-20T17:45:48.057Z","command":"ls","status":"SUCCESS","stdout":"testdir\ntest.txt\n","stderr":""}
 {"timestamp":"2026-03-20T17:45:55.778Z","command":"cd testdir","status":"BLOCKED","stdout":"Error: Command not allowed\n","stderr":""}
+{"timestamp":"2026-03-20T19:29:14.501Z","command":"pwd","status":"SUCCESS","stdout":"/home/sandbox_env\n","stderr":""}
+{"timestamp":"2026-03-20T19:29:17.658Z","command":"ls","status":"SUCCESS","stdout":"testdir\ntest.txt\n","stderr":""}
+{"timestamp":"2026-03-20T19:29:30.474Z","command":"whoami","status":"SUCCESS","stdout":"sandboxuser\n","stderr":""}
+{"timestamp":"2026-03-20T19:39:31.800Z","command":"ls","status":"SUCCESS","stdout":"testdir\ntest.txt\n","stderr":""}
+{"timestamp":"2026-03-20T19:39:39.079Z","command":"pwd","status":"SUCCESS","stdout":"/home/sandbox_env\n","stderr":""}
+{"timestamp":"2026-03-20T19:39:41.165Z","command":"ls","status":"SUCCESS","stdout":"testdir\ntest.txt\n","stderr":""}
+{"timestamp":"2026-03-20T19:39:52.683Z","command":"whoami","status":"SUCCESS","stdout":"sandboxuser\n","stderr":""}
+{"timestamp":"2026-03-20T19:47:07.364Z","command":"ls","status":"SUCCESS","stdout":"testdir\ntest.txt\n","stderr":""}
+{"timestamp":"2026-03-20T19:47:12.274Z","command":"pwd","status":"SUCCESS","stdout":"/home/sandbox_env\n","stderr":""}
+{"timestamp":"2026-03-20T19:47:15.696Z","command":"cd","status":"BLOCKED","stdout":"Error: Command not allowed\n","stderr":""}
+{"timestamp":"2026-03-20T19:47:24.700Z","command":"cd testdir","status":"BLOCKED","stdout":"Error: Command not allowed\n","stderr":""}

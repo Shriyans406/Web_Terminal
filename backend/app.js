@@ -7,7 +7,10 @@ app.use(cors());
 app.use(express.json());
 
 const executeRoute = require('./routes/execute');
+const sessionRoute = require('./routes/session');
+
 app.use('/api', executeRoute);
+app.use('/api', sessionRoute);
 
 app.get('/', (req, res) => {
     res.send('Backend is running');
