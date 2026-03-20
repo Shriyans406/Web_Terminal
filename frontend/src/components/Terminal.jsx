@@ -5,12 +5,10 @@ import { executeCommand } from '../services/api';
 
 const WebTerminal = () => {
     const terminalRef = useRef(null);
-    const term = useRef(null);
-
-    let command = '';
+    const termRef = useRef(null);
 
     useEffect(() => {
-        term.current = new Terminal({
+        const term = new Terminal({
             cursorBlink: true,
             theme: {
                 background: '#000000',
@@ -18,30 +16,40 @@ const WebTerminal = () => {
             }
         });
 
-        term.current.open(terminalRef.current);
+        term.open(terminalRef.current);
+        termRef.current = term;
+
+        let command = '';
+        let history = [];
+        let historyIndex = -1;
 
         const prompt = () => {
-            term.current.write('\r\nuser@web:~$ ');
+            term.write('\r\nuser@web:~$ ');
         };
 
-        term.current.write('Welcome to Linux Web Terminal');
+        term.write('Welcome to Linux Web Terminal');
         prompt();
 
-        term.current.onData(async (data) => {
+        term.onData(async (data) => {
             const char = data;
 
             // ENTER
             if (char === '\r') {
-                term.current.write('\r\n');
+                term.write('\r\n');
+
+                if (command.trim() !== '') {
+                    history.push(command);
+                    historyIndex = history.length;
+                }
 
                 const result = await executeCommand(command);
 
                 if (result.stdout) {
-                    term.current.write(result.stdout);
+                    term.write(result.stdout);
                 }
 
                 if (result.stderr) {
-                    term.current.write('\r\n\x1b[31m' + result.stderr + '\x1b[0m');
+                    term.write('\r\n\x1b[31m' + result.stderr + '\x1b[0m');
                 }
 
                 command = '';
@@ -52,19 +60,57 @@ const WebTerminal = () => {
             else if (char === '\u007F') {
                 if (command.length > 0) {
                     command = command.slice(0, -1);
-                    term.current.write('\b \b');
+                    term.write('\b \b');
+                }
+            }
+
+            // UP ARROW
+            else if (char === '\x1b[A') {
+                if (history.length > 0 && historyIndex > 0) {
+                    historyIndex--;
+
+                    while (command.length > 0) {
+                        term.write('\b \b');
+                        command = command.slice(0, -1);
+                    }
+
+                    command = history[historyIndex];
+                    term.write(command);
+                }
+            }
+
+            // DOWN ARROW
+            else if (char === '\x1b[B') {
+                if (historyIndex < history.length - 1) {
+                    historyIndex++;
+
+                    while (command.length > 0) {
+                        term.write('\b \b');
+                        command = command.slice(0, -1);
+                    }
+
+                    command = history[historyIndex];
+                    term.write(command);
+                } else {
+                    while (command.length > 0) {
+                        term.write('\b \b');
+                        command = command.slice(0, -1);
+                    }
+
+                    historyIndex = history.length;
+                    command = '';
                 }
             }
 
             // NORMAL CHAR
             else {
                 command += char;
-                term.current.write(char);
+                term.write(char);
             }
         });
 
         return () => {
-            term.current.dispose();
+            term.dispose();
         };
     }, []);
 
