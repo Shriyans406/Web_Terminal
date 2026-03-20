@@ -1,0 +1,6 @@
+{"timestamp":"2026-03-20T05:46:34.698Z","command":"ls","status":"SUCCESS","stdout":"app.js\ncontrollers\nnode_modules\npackage.json\npackage-lock.json\nroutes\nutils\n","stderr":""}
+{"timestamp":"2026-03-20T05:46:39.927Z","command":"whoami","status":"SUCCESS","stdout":"vboxuser\n","stderr":""}
+{"timestamp":"2026-03-20T05:46:43.488Z","command":"pwd","status":"SUCCESS","stdout":"/home/vboxuser/projects/linux-command-sandbox/backend\n","stderr":""}
+{"timestamp":"2026-03-20T05:46:47.325Z","command":"ls","status":"SUCCESS","stdout":"app.js\ncontrollers\nnode_modules\npackage.json\npackage-lock.json\nroutes\nutils\n","stderr":""}
+{"timestamp":"2026-03-20T05:46:56.463Z","command":"cd controllers","status":"BLOCKED","stdout":"Error: Command not allowed\n","stderr":""}
+{"timestamp":"2026-03-20T05:47:33.391Z","command":"ping google.com","status":"BLOCKED","stdout":"Error: Command not allowed\n","stderr":""}
