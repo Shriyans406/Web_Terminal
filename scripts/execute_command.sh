@@ -12,9 +12,9 @@ if [ "$VALIDATION" != "ALLOWED" ]; then
 fi
 
 # -----------------------------
-#  SAFE EXECUTION (NO eval injection)
+# 🔐 SANDBOX EXECUTION
 # -----------------------------
 
-OUTPUT=$(bash -c "$COMMAND" 2>&1)
+OUTPUT=$(sudo -u sandboxuser bash -c "cd /home/sandbox_env && $COMMAND" 2>&1)
 
 echo "$OUTPUT"

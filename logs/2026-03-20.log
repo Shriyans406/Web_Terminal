@@ -4,3 +4,14 @@
 {"timestamp":"2026-03-20T05:46:47.325Z","command":"ls","status":"SUCCESS","stdout":"app.js\ncontrollers\nnode_modules\npackage.json\npackage-lock.json\nroutes\nutils\n","stderr":""}
 {"timestamp":"2026-03-20T05:46:56.463Z","command":"cd controllers","status":"BLOCKED","stdout":"Error: Command not allowed\n","stderr":""}
 {"timestamp":"2026-03-20T05:47:33.391Z","command":"ping google.com","status":"BLOCKED","stdout":"Error: Command not allowed\n","stderr":""}
+{"timestamp":"2026-03-20T15:11:49.999Z","command":"sudo adduser sandboxuser","status":"BLOCKED","stdout":"Error: Command not allowed\n","stderr":""}
+{"timestamp":"2026-03-20T15:12:22.989Z","command":"\u0016\u0016sudo visudo","status":"BLOCKED","stdout":"Error: Command not allowed\n","stderr":""}
+{"timestamp":"2026-03-20T15:12:48.039Z","command":"sudo adduser sandboxuser","status":"BLOCKED","stdout":"Error: Command not allowed\n","stderr":""}
+{"timestamp":"2026-03-20T15:19:07.073Z","command":"whoami","status":"SUCCESS","stdout":"sandboxuser\n","stderr":""}
+{"timestamp":"2026-03-20T15:19:28.486Z","command":"touch test.txt","status":"BLOCKED","stdout":"Error: Command not allowed\n","stderr":""}
+{"timestamp":"2026-03-20T15:19:38.001Z","command":"ls","status":"SUCCESS","stdout":"\n","stderr":""}
+{"timestamp":"2026-03-20T15:19:48.037Z","command":"ls /home/sandbox_env","status":"SUCCESS","stdout":"\n","stderr":""}
+{"timestamp":"2026-03-20T15:19:52.936Z","command":"touch test.txt","status":"BLOCKED","stdout":"Error: Command not allowed\n","stderr":""}
+{"timestamp":"2026-03-20T15:21:14.354Z","command":"pwd","status":"SUCCESS","stdout":"/home/sandbox_env\n","stderr":""}
+{"timestamp":"2026-03-20T15:21:29.851Z","command":"rm -rf /","status":"BLOCKED","stdout":"Error: Command not allowed\n","stderr":""}
+{"timestamp":"2026-03-20T15:21:44.280Z","command":"\u0016touch test.txt","status":"BLOCKED","stdout":"Error: Command not allowed\n","stderr":""}
