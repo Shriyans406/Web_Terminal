@@ -1,0 +1,12 @@
+{"timestamp":"2026-03-21T04:24:48.364Z","command":"pwd","status":"SUCCESS","stdout":"/home/sandbox_env\n","stderr":""}
+{"timestamp":"2026-03-21T04:24:55.595Z","command":"ls","status":"SUCCESS","stdout":"testdir\ntest.txt\n","stderr":""}
+{"timestamp":"2026-03-21T04:25:08.325Z","command":"pwd","status":"SUCCESS","stdout":"/home/sandbox_env\n","stderr":""}
+{"timestamp":"2026-03-21T04:25:35.264Z","command":"cat test.txt","status":"SUCCESS","stdout":"\n","stderr":""}
+{"timestamp":"2026-03-21T04:36:09.130Z","command":"ls","status":"ERROR","stdout":"testdir\ntest.txt\n","stderr":"DEBUG DIR: /home/sandbox_env\n"}
+{"timestamp":"2026-03-21T04:36:14.884Z","command":"pwd","status":"ERROR","stdout":"/home/sandbox_env\n","stderr":"DEBUG DIR: /home/sandbox_env\n"}
+{"timestamp":"2026-03-21T04:36:24.582Z","command":"ls","status":"ERROR","stdout":"testdir\ntest.txt\n","stderr":"DEBUG DIR: /home/sandbox_env\n"}
+{"timestamp":"2026-03-21T04:36:27.615Z","command":"pwd","status":"ERROR","stdout":"/home/sandbox_env\n","stderr":"DEBUG DIR: /home/sandbox_env\n"}
+{"timestamp":"2026-03-21T04:41:42.992Z","command":"pwd","status":"ERROR","stdout":"/home/sandbox_env\n","stderr":"DEBUG DIR: /home/sandbox_env\n"}
+{"timestamp":"2026-03-21T04:41:45.141Z","command":"ls","status":"ERROR","stdout":"testdir\ntest.txt\n","stderr":"DEBUG DIR: /home/sandbox_env\n"}
+{"timestamp":"2026-03-21T04:41:54.485Z","command":"ls","status":"ERROR","stdout":"testdir\ntest.txt\n","stderr":"DEBUG DIR: /home/sandbox_env\n"}
+{"timestamp":"2026-03-21T04:41:56.747Z","command":"pwd","status":"ERROR","stdout":"/home/sandbox_env\n","stderr":"DEBUG DIR: /home/sandbox_env\n"}

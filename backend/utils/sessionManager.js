@@ -5,15 +5,13 @@ const createSession = () => {
 
     sessions[sessionId] = {
         history: [],
-        currentDir: process.cwd()
+        currentDir: '/home/sandbox_env'
     };
 
     return sessionId;
 };
 
-const getSession = (sessionId) => {
-    return sessions[sessionId];
-};
+const getSession = (sessionId) => sessions[sessionId];
 
 const updateSession = (sessionId, command) => {
     if (sessions[sessionId]) {
@@ -21,8 +19,15 @@ const updateSession = (sessionId, command) => {
     }
 };
 
+const updateDirectory = (sessionId, dir) => {
+    if (sessions[sessionId]) {
+        sessions[sessionId].currentDir = dir;
+    }
+};
+
 module.exports = {
     createSession,
     getSession,
-    updateSession
+    updateSession,
+    updateDirectory
 };

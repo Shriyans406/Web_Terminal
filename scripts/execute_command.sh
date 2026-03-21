@@ -1,9 +1,11 @@
 #!/bin/bash
 
 COMMAND="$1"
+WORKDIR="$2"
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 
+# Validate command
 VALIDATION=$("$SCRIPT_DIR/validate_command.sh" "$COMMAND")
 
 if [ "$VALIDATION" != "ALLOWED" ]; then
@@ -11,10 +13,20 @@ if [ "$VALIDATION" != "ALLOWED" ]; then
     exit 1
 fi
 
-# -----------------------------
-# 🔐 SANDBOX EXECUTION
-# -----------------------------
+# Default directory
+if [ -z "$WORKDIR" ]; then
+    WORKDIR="/home/sandbox_env"
+fi
 
-OUTPUT=$(sudo -u sandboxuser bash -c "cd /home/sandbox_env && $COMMAND" 2>&1)
+# If directory doesn't exist → fallback
+if [ ! -d "$WORKDIR" ]; then
+    WORKDIR="/home/sandbox_env"
+fi
+
+# 🔥 DEBUG (IMPORTANT for now)
+echo "DEBUG DIR: $WORKDIR" >&2
+
+# Execute command inside sandbox user
+OUTPUT=$(sudo -u sandboxuser bash -c "cd \"$WORKDIR\" && $COMMAND" 2>&1)
 
 echo "$OUTPUT"

@@ -1,17 +1,83 @@
 const { runCommand } = require('../utils/commandRunner');
 const { logCommand } = require('../utils/logger');
+const {
+    getSession,
+    updateSession,
+    updateDirectory
+} = require('../utils/sessionManager');
+
+const path = require('path');
 
 const executeCommand = async (req, res) => {
     try {
-        const { command } = req.body;
+        const { command, sessionId } = req.body;
 
         if (!command) {
             return res.status(400).json({ error: 'No command provided' });
         }
 
-        const result = await runCommand(command);
+        // -----------------------------
+        // GET SESSION
+        // -----------------------------
+        const session = getSession(sessionId);
 
-        // Determine status
+        if (!session) {
+            return res.status(400).json({ error: 'Invalid session' });
+        }
+
+        let currentDir = session.currentDir;
+
+        console.log("CURRENT DIR:", currentDir);
+
+        // -----------------------------
+        // HANDLE CD COMMAND
+        // -----------------------------
+        if (command.startsWith('cd')) {
+            let target = command.split(' ')[1];
+
+            // If just "cd" → go to root sandbox
+            if (!target || target === '~') {
+                target = '/home/sandbox_env';
+            }
+
+            let newPath;
+
+            if (target.startsWith('/')) {
+                newPath = target;
+            } else {
+                newPath = path.resolve(currentDir, target);
+            }
+
+            // SECURITY: restrict to sandbox
+            if (!newPath.startsWith('/home/sandbox_env')) {
+                return res.json({
+                    stdout: '',
+                    stderr: 'Access Denied'
+                });
+            }
+
+            // Update session directory
+            updateDirectory(sessionId, newPath);
+
+            return res.json({
+                stdout: '',
+                stderr: ''
+            });
+        }
+
+        // -----------------------------
+        // RUN NORMAL COMMAND
+        // -----------------------------
+        const result = await runCommand(command, currentDir);
+
+        // -----------------------------
+        // UPDATE SESSION HISTORY
+        // -----------------------------
+        updateSession(sessionId, command);
+
+        // -----------------------------
+        // DETERMINE STATUS
+        // -----------------------------
         let status = 'SUCCESS';
 
         if (result.stderr && result.stderr.trim() !== '') {
@@ -22,7 +88,9 @@ const executeCommand = async (req, res) => {
             status = 'BLOCKED';
         }
 
-        // Log the command
+        // -----------------------------
+        // LOG COMMAND
+        // -----------------------------
         logCommand({
             command,
             status,
@@ -30,6 +98,9 @@ const executeCommand = async (req, res) => {
             stderr: result.stderr
         });
 
+        // -----------------------------
+        // SEND RESPONSE
+        // -----------------------------
         res.json({
             stdout: result.stdout,
             stderr: result.stderr
