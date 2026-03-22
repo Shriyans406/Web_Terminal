@@ -32,8 +32,13 @@ const executeCommand = async (req, res) => {
         // -----------------------------
         // HANDLE CD COMMAND
         // -----------------------------
-        if (command.startsWith('cd')) {
-            let target = command.split(' ')[1];
+        // -----------------------------
+        // HANDLE CD COMMAND (FIXED)
+        // -----------------------------
+        if (command.trim().startsWith('cd')) {
+            const parts = command.trim().split(/\s+/);
+
+            let target = parts[1];
 
             // If just "cd" → go to root sandbox
             if (!target || target === '~') {
@@ -48,7 +53,11 @@ const executeCommand = async (req, res) => {
                 newPath = path.resolve(currentDir, target);
             }
 
-            // SECURITY: restrict to sandbox
+            // 🔥 DEBUG
+            console.log("CD TARGET:", target);
+            console.log("NEW PATH:", newPath);
+
+            // SECURITY: restrict inside sandbox
             if (!newPath.startsWith('/home/sandbox_env')) {
                 return res.json({
                     stdout: '',
@@ -56,8 +65,13 @@ const executeCommand = async (req, res) => {
                 });
             }
 
-            // Update session directory
+            // 🔥 CHECK IF DIRECTORY EXISTS
+
+
+            // 🔥 UPDATE SESSION
             updateDirectory(sessionId, newPath);
+
+            console.log("UPDATED DIR:", newPath);
 
             return res.json({
                 stdout: '',

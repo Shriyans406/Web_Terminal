@@ -27,6 +27,7 @@ fi
 echo "DEBUG DIR: $WORKDIR" >&2
 
 # Execute command inside sandbox user
-OUTPUT=$(sudo -u sandboxuser bash -c "cd \"$WORKDIR\" && $COMMAND" 2>&1)
-
+OUTPUT=$(sudo -u sandboxuser bash -c "cd \"$WORKDIR\" ; $COMMAND" 2>&1)
+#OUTPUT=$(sudo -u sandboxuser bash -c "cd \"$WORKDIR\" ; pwd; $COMMAND" 2>&1)
+echo "DEBUG DIR BEFORE EXEC: $WORKDIR" >&2
 echo "$OUTPUT"
