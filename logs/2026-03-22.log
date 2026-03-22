@@ -23,3 +23,19 @@
 {"timestamp":"2026-03-22T07:28:27.230Z","command":"ls","status":"ERROR","stdout":"/home/sandbox_env\ntestdir\ntestdir1\ntest.txt\n","stderr":"DEBUG DIR: /home/sandbox_env\nDEBUG DIR BEFORE EXEC: /home/sandbox_env\n"}
 {"timestamp":"2026-03-22T07:28:43.657Z","command":"ls","status":"ERROR","stdout":"/home/sandbox_env\ntestdir\ntestdir1\ntest.txt\n","stderr":"DEBUG DIR: /home/sandbox_env\nDEBUG DIR BEFORE EXEC: /home/sandbox_env\n"}
 {"timestamp":"2026-03-22T07:29:25.551Z","command":"ls","status":"ERROR","stdout":"testdir\ntestdir1\ntest.txt\n","stderr":"DEBUG DIR: /home/sandbox_env\nDEBUG DIR BEFORE EXEC: /home/sandbox_env\n"}
+{"timestamp":"2026-03-22T07:40:58.255Z","command":"pwd","status":"ERROR","stdout":"/home/sandbox_env\n","stderr":"DEBUG DIR: /home/sandbox_env\nDEBUG DIR BEFORE EXEC: /home/sandbox_env\n"}
+{"timestamp":"2026-03-22T07:40:58.408Z","command":"pwd","status":"ERROR","stdout":"/home/sandbox_env\n","stderr":"DEBUG DIR: /home/sandbox_env\nDEBUG DIR BEFORE EXEC: /home/sandbox_env\n"}
+{"timestamp":"2026-03-22T07:44:58.886Z","command":"pwd","status":"ERROR","stdout":"/home/sandbox_env\n","stderr":"DEBUG DIR: /home/sandbox_env\nDEBUG DIR BEFORE EXEC: /home/sandbox_env\n"}
+{"timestamp":"2026-03-22T07:44:59.157Z","command":"pwd","status":"ERROR","stdout":"/home/sandbox_env\n","stderr":"DEBUG DIR: /home/sandbox_env\nDEBUG DIR BEFORE EXEC: /home/sandbox_env\n"}
+{"timestamp":"2026-03-22T07:46:17.904Z","command":"ls -F","status":"ERROR","stdout":"testdir/\ntestdir1/\ntest.txt\n","stderr":"DEBUG DIR: /home/sandbox_env\nDEBUG DIR BEFORE EXEC: /home/sandbox_env\n"}
+{"timestamp":"2026-03-22T07:47:25.794Z","command":"ls -F","status":"ERROR","stdout":"testdir/\ntestdir1/\ntest.txt\n","stderr":"DEBUG DIR: /home/sandbox_env\nDEBUG DIR BEFORE EXEC: /home/sandbox_env\n"}
+{"timestamp":"2026-03-22T07:48:15.801Z","command":"ls -F","status":"ERROR","stdout":"testdir/\ntestdir1/\ntest.txt\n","stderr":"DEBUG DIR: /home/sandbox_env\nDEBUG DIR BEFORE EXEC: /home/sandbox_env\n"}
+{"timestamp":"2026-03-22T07:49:50.903Z","command":"ls -F","status":"ERROR","stdout":"testdir/\ntestdir1/\ntest.txt\n","stderr":"DEBUG DIR: /home/sandbox_env\nDEBUG DIR BEFORE EXEC: /home/sandbox_env\n"}
+{"timestamp":"2026-03-22T07:50:06.337Z","command":"pwd","status":"ERROR","stdout":"/home/sandbox_env/testdir\n","stderr":"DEBUG DIR: /home/sandbox_env/testdir\nDEBUG DIR BEFORE EXEC: /home/sandbox_env/testdir\n"}
+{"timestamp":"2026-03-22T07:50:36.815Z","command":"ls -d non_existent","status":"ERROR","stdout":"ls: cannot access 'non_existent': No such file or directory\n","stderr":"DEBUG DIR: /home/sandbox_env\nDEBUG DIR BEFORE EXEC: /home/sandbox_env\n"}
+{"timestamp":"2026-03-22T07:51:22.052Z","command":"pwd","status":"ERROR","stdout":"/home/sandbox_env/testdir\n","stderr":"DEBUG DIR: /home/sandbox_env/testdir\nDEBUG DIR BEFORE EXEC: /home/sandbox_env/testdir\n"}
+{"timestamp":"2026-03-22T07:51:22.354Z","command":"pwd","status":"ERROR","stdout":"/home/sandbox_env/testdir\n","stderr":"DEBUG DIR: /home/sandbox_env/testdir\nDEBUG DIR BEFORE EXEC: /home/sandbox_env/testdir\n"}
+{"timestamp":"2026-03-22T07:52:04.630Z","command":"ls","status":"ERROR","stdout":"testdir\ntestdir1\ntest.txt\n","stderr":"DEBUG DIR: /home/sandbox_env\nDEBUG DIR BEFORE EXEC: /home/sandbox_env\n"}
+{"timestamp":"2026-03-22T07:52:19.804Z","command":"pwd","status":"ERROR","stdout":"/home/sandbox_env/testdir\n","stderr":"DEBUG DIR: /home/sandbox_env/testdir\nDEBUG DIR BEFORE EXEC: /home/sandbox_env/testdir\n"}
+{"timestamp":"2026-03-22T08:06:26.699Z","command":"ls","status":"ERROR","stdout":"testdir\ntestdir1\ntest.txt\n","stderr":"DEBUG DIR: /home/sandbox_env\nDEBUG DIR BEFORE EXEC: /home/sandbox_env\n"}
+{"timestamp":"2026-03-22T08:06:36.860Z","command":"ls","status":"ERROR","stdout":"\n","stderr":"DEBUG DIR: /home/sandbox_env/testdir\nDEBUG DIR BEFORE EXEC: /home/sandbox_env/testdir\n"}

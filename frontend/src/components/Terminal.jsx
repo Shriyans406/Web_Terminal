@@ -46,10 +46,10 @@ const WebTerminal = () => {
             let command = '';
             let history = [];
             let historyIndex = -1;
-            //let isProcessing = false;
+            let currentPath = '~';
 
             const prompt = () => {
-                term.write('\r\n\x1b[32muser@web\x1b[0m:\x1b[34m~\x1b[0m$ ');
+                term.write(`\r\n\x1b[32muser@web\x1b[0m:\x1b[37m${currentPath}\x1b[0m$ `);
             };
 
             term.write('\x1b[33mWelcome to Linux Command Sandbox\x1b[0m');
@@ -82,6 +82,10 @@ const WebTerminal = () => {
 
                     if (result.stderr) {
                         term.write('\r\n\x1b[31m' + result.stderr + '\x1b[0m');
+                    }
+
+                    if (result.currentDir) {
+                        currentPath = result.currentDir;
                     }
 
                     //isProcessing = false;

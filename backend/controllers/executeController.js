@@ -65,17 +65,27 @@ const executeCommand = async (req, res) => {
                 });
             }
 
-            // 🔥 CHECK IF DIRECTORY EXISTS
-
+            // 🔥 CHECK IF DIRECTORY EXISTS (USING LS -D)
+            const checkDir = await runCommand(`ls -d "${newPath}"`, '/');
+            
+            if (checkDir.stdout.includes('No such file or directory')) {
+                return res.json({
+                    stdout: '',
+                    stderr: `cd: ${target}: No such file or directory`
+                });
+            }
 
             // 🔥 UPDATE SESSION
             updateDirectory(sessionId, newPath);
 
             console.log("UPDATED DIR:", newPath);
 
+            const formattedDir = newPath.replace('/home/sandbox_env', '~') || '~';
+
             return res.json({
                 stdout: '',
-                stderr: ''
+                stderr: '',
+                currentDir: formattedDir
             });
         }
 
@@ -113,11 +123,17 @@ const executeCommand = async (req, res) => {
         });
 
         // -----------------------------
+        // FORMAT CURRENT DIR FOR UI
+        // -----------------------------
+        const formattedDir = currentDir.replace('/home/sandbox_env', '~') || '~';
+
+        // -----------------------------
         // SEND RESPONSE
         // -----------------------------
         res.json({
             stdout: result.stdout,
-            stderr: result.stderr
+            stderr: result.stderr,
+            currentDir: formattedDir
         });
 
     } catch (error) {

@@ -18,10 +18,8 @@ if [ -z "$WORKDIR" ]; then
     WORKDIR="/home/sandbox_env"
 fi
 
-# If directory doesn't exist → fallback
-if [ ! -d "$WORKDIR" ]; then
-    WORKDIR="/home/sandbox_env"
-fi
+# Execute command inside sandbox user
+OUTPUT=$(sudo -u sandboxuser bash -c "cd \"$WORKDIR\" ; $COMMAND" 2>&1)
 
 # 🔥 DEBUG (IMPORTANT for now)
 echo "DEBUG DIR: $WORKDIR" >&2

@@ -1,0 +1,20 @@
+nohup: ignoring input
+Server running on port 5000
+CURRENT DIR: /home/sandbox_env
+CD TARGET: testdir
+NEW PATH: /home/sandbox_env/testdir
+UPDATED DIR: /home/sandbox_env/testdir
+CURRENT DIR: /home/sandbox_env
+CD TARGET: testdir
+NEW PATH: /home/sandbox_env/testdir
+UPDATED DIR: /home/sandbox_env/testdir
+CURRENT DIR: /home/sandbox_env
+CURRENT DIR: /home/sandbox_env
+CD TARGET: testdir
+NEW PATH: /home/sandbox_env/testdir
+UPDATED DIR: /home/sandbox_env/testdir
+CURRENT DIR: /home/sandbox_env/testdir
+CURRENT DIR: /home/sandbox_env/testdir
+CD TARGET: ..
+NEW PATH: /home/sandbox_env
+UPDATED DIR: /home/sandbox_env
