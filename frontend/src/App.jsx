@@ -1,30 +1,25 @@
 import WebTerminal from './components/Terminal';
+import './App.css';
 
 function App() {
   return (
-    <div
-      style={{
-        height: '100vh',
-        backgroundColor: '#0d1117',
-        color: '#fff',
-        padding: '20px',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center'   // only center container, NOT text
-      }}
-    >
-      <h1 style={{ marginBottom: '20px' }}>
-        Linux Command Sandbox
-      </h1>
+    <div className="app-container">
+      <header className="header">
+        <h1>Linux Command Sandbox</h1>
+        <p>A high-performance terminal environment in your browser.</p>
+      </header>
 
-      <div
-        style={{
-          width: '100%',
-          maxWidth: '1000px'
-        }}
-      >
-        <WebTerminal />
-      </div>
+      <main className="terminal-wrapper">
+        <div className="terminal-inner">
+          <div className="terminal-header">
+            <div className="dot red"></div>
+            <div className="dot yellow"></div>
+            <div className="dot green"></div>
+            <span className="terminal-title">bash — web-terminal</span>
+          </div>
+          <WebTerminal />
+        </div>
+      </main>
     </div>
   );
 }

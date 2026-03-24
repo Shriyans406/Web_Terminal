@@ -20,12 +20,22 @@ const WebTerminal = () => {
             const term = new Terminal({
                 cursorBlink: true,
                 fontSize: 14,
-                fontFamily: 'monospace',
+                fontFamily: "'JetBrains Mono', monospace",
                 theme: {
-                    background: '#000000',   // pure black
-                    foreground: '#00ff00',   // bright green
-                    cursor: '#ffffff'
+                    background: 'transparent',
+                    foreground: '#E6EDF3',
+                    cursor: '#7C4DFF',
+                    selection: 'rgba(124, 77, 255, 0.3)',
+                    black: '#161B22',
+                    red: '#FF5F56',
+                    green: '#27C93F',
+                    yellow: '#FFBD2E',
+                    blue: '#00D4FF',
+                    magenta: '#7C4DFF',
+                    cyan: '#00D4FF',
+                    white: '#E6EDF3'
                 },
+                allowTransparency: true,
                 scrollback: 1000
             });
 
@@ -49,10 +59,10 @@ const WebTerminal = () => {
             let currentPath = '~';
 
             const prompt = () => {
-                term.write(`\r\n\x1b[32muser@web\x1b[0m:\x1b[37m${currentPath}\x1b[0m$ `);
+                term.write(`\r\n\x1b[36m${currentPath}\x1b[0m \x1b[35m❯\x1b[0m `);
             };
 
-            term.write('\x1b[33mWelcome to Linux Command Sandbox\x1b[0m');
+            term.write('\x1b[1;35mWelcome to Linux Command Sandbox\x1b[0m\r\n\x1b[2mType your commands below to interact with the system.\x1b[0m');
             prompt();
 
             term.onData(async (data) => {
@@ -155,11 +165,8 @@ const WebTerminal = () => {
             style={{
                 width: '100%',
                 height: '500px',
-                borderRadius: '10px',
-                overflow: 'hidden',
-                border: '1px solid #30363d',
-                boxShadow: '0 0 20px rgba(0,0,0,0.5)',
-                backgroundColor: '#0d1117'
+                padding: '10px',
+                boxSizing: 'border-box'
             }}
         >
             <div
@@ -167,9 +174,7 @@ const WebTerminal = () => {
                 style={{
                     width: '100%',
                     height: '100%',
-                    padding: '10px',
-                    boxSizing: 'border-box',
-                    textAlign: 'left'   // ✅ CRITICAL FIX
+                    textAlign: 'left'
                 }}
             />
         </div>
